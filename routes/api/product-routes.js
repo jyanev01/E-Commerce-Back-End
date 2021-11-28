@@ -147,19 +147,19 @@ router.delete('/:id', (req, res) => {
       id: req.params.id,
     },
   })
-  .then((product) => {
-    // find all associated tags from ProductTag
-    return ProductTag.findAll({ where: { product_id: req.params.id } });
-  })
-  .then((productTagsToRemove) => {
-    const productTagIdsToRemove = productTagsToRemove
-    .map(({ id }) => id);
-    console.log(productTagIdsToRemove);
-    ProductTag.destroy({ where: { id: productTagsIdsToRemove }})
-  })
+  // .then((product) => {
+  //   // find all associated tags from ProductTag
+  //   return ProductTag.findAll({ where: { product_id: req.params.id } });
+  // })
+  // .then((productTagsToRemove) => {
+  //   const productTagIdsToRemove = productTagsToRemove
+  //   .map(({ id }) => id);
+  //   console.log(productTagIdsToRemove);
+  //   ProductTag.destroy({ where: { id: productTagsIdsToRemove }})
+  // })
   .then(dbProductData => {
     if(!dbProductData) {
-      res.status(404).json({ message: 'No product tag with this id are found'});
+      res.status(404).json({ message: 'No product with this id are found'});
       return;
     }
     res.json(dbProductData);
